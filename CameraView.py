@@ -49,14 +49,16 @@ class CameraView:
         else:
             window.blit(self.bg2, (0, 0))
 
-        
- 
-        window.blit(self.player_image_1,(logic.p1.pos[0], logic.p1.pos[1]))
-        window.blit(self.player_image_2,(logic.p2.pos[0], logic.p2.pos[1]))
+        #draw trash
         for trash in logic.trash_list:
             if (trash.id > 5):
                 trash_pic = self.recycle[trash.id - 6]
             else:
                 trash_pic = self.garbage[trash.id - 1]
             window.blit(trash_pic, (trash.pos[0]*800, trash.pos[1]))
+ 
+        #draw player bins
+        window.blit(self.player_image_1,(logic.p1.pos[0], logic.p1.pos[1]))
+        window.blit(self.player_image_2,(logic.p2.pos[0], logic.p2.pos[1]))
+        
         pygame.display.update()

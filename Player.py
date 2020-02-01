@@ -12,6 +12,7 @@ class Player:
 		self.pos[0] += self.vel[0] * dt
 		self.pos[1] += self.vel[1] * dt * self.flag
 
+		#cap and flip bobbing
 		if (self.pos[1] > 480):
 			self.flag *= -1
 			self.pos[1] = 480
@@ -19,6 +20,7 @@ class Player:
 			self.flag *= -1
 			self.pos[1] = 460
 
+		#set position boundaries
 		if (self.pos[0] < -50):
 			self.pos[0] = -50
 			self.vel[0] = 0
@@ -26,23 +28,24 @@ class Player:
 			self.pos[0] = 720
 			self.vel[0] = 0
 
-
+		# decelerate
 		if (self.vel[0] > 0):
 			self.vel[0] -= dt * 0.0001
 		if (self.vel[0] < 0):
 			self.vel[0] += dt * 0.0001
+		#cap movement speed
 		if (self.vel[0] > 0.5):
 			self.vel[0] = 0.5
 		if (self.vel[0] < -0.5):
 			self.vel[0] = -0.5
 
+		#cap and decelerate bobbing speed
 		if (self.vel[1] > 0.025):
 			self.vel[1] = 0.025
 		if (self.vel[1] < 0.02):
 			self.vel[1] = 0.02
 		else:
 			self.vel[1] -= 0.0001 * dt
-
 
 	def thrustLeft(self, dt):
 		self.vel[0] -= dt * 0.001
