@@ -4,20 +4,21 @@ class Player:
 		self.flag = 1
 
 		if (number == 1):
-			self.pos = [370, 470]
+			self.pos = [370, 460]
 		elif (number == 2):
-			self.pos = [370, 490]
+			self.pos = [370, 480]
 
 	def update(self, dt):
+		print(self.vel[0])
 		self.pos[0] += self.vel[0] * dt
 		self.pos[1] += self.vel[1] * dt * self.flag
 
-		if (self.pos[1] > 490):
+		if (self.pos[1] > 480):
 			self.flag *= -1
-			self.pos[1] = 490
-		elif (self.pos[1] < 470):
+			self.pos[1] = 480
+		elif (self.pos[1] < 460):
 			self.flag *= -1
-			self.pos[1] = 470
+			self.pos[1] = 460
 
 		if (self.pos[0] < -50):
 			self.pos[0] = -50
@@ -31,6 +32,10 @@ class Player:
 			self.vel[0] -= dt * 0.0001
 		if (self.vel[0] < 0):
 			self.vel[0] += dt * 0.0001
+		if (self.vel[0] > 0.5):
+			self.vel[0] = 0.5
+		if (self.vel[0] < -0.5):
+			self.vel[0] = -0.5
 
 		if (self.vel[1] > 0.025):
 			self.vel[1] = 0.025
