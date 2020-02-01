@@ -2,8 +2,8 @@ import pygame
 
 class CameraView:
     def __init__(self):
-        self.player_image_1 = pygame.image.load('images/ufo.png')
-        self.player_image_2 = pygame.image.load('images/ufo.png')
+        self.player_image_1 = pygame.image.load('images/trash.png')
+        self.player_image_2 = pygame.image.load('images/recycle_bin.png')
         self.trash_image = pygame.image.load('images/enemy.png')
         self.background_image = pygame.image.load('images/background.png')
 
