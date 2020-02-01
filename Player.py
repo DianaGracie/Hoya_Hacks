@@ -9,7 +9,6 @@ class Player:
 			self.pos = [370, 480]
 
 	def update(self, dt):
-		print(self.vel[0])
 		self.pos[0] += self.vel[0] * dt
 		self.pos[1] += self.vel[1] * dt * self.flag
 
