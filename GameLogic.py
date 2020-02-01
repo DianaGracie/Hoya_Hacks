@@ -10,3 +10,4 @@ class GameLogic:
 
 	def update(self, dt):
 		self.p1.update(dt)
+		self.p2.update(dt)
