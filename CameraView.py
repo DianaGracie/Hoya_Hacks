@@ -4,9 +4,20 @@ class CameraView:
     def __init__(self):
         self.player_image_1 = pygame.image.load('images/trash.png')
         self.player_image_2 = pygame.image.load('images/recycle_bin.png')
-        self.trash_image = pygame.image.load('images/enemy.png')
         self.bg1 = pygame.image.load('images/background.png')
         self.bg2 = pygame.image.load('images/background2.png')
+
+        self.garbage = [pygame.image.load('images/garbage/1.png'),
+        pygame.image.load('images/garbage/2.png'), 
+        pygame.image.load('images/garbage/3.png'),
+        pygame.image.load('images/garbage/4.png'),
+        pygame.image.load('images/garbage/5.jpg')]
+
+        self.recycle = [pygame.image.load('images/recyclables/1.png'),
+        pygame.image.load('images/recyclables/2.png'),
+        pygame.image.load('images/recyclables/3.png'),
+        pygame.image.load('images/recyclables/4.png'),
+        pygame.image.load('images/recyclables/5.png')]
 
     def processInput(self, window, logic, dt):
         pressed = pygame.key.get_pressed()
@@ -38,10 +49,16 @@ class CameraView:
         else:
             window.blit(self.bg2, (0, 0))
 
-        
+        #draw trash
+        for trash in logic.trash_list:
+            if (trash.id > 5):
+                trash_pic = self.recycle[trash.id - 6]
+            else:
+                trash_pic = self.garbage[trash.id - 1]
+            window.blit(trash_pic, (trash.pos[0]*800, trash.pos[1]))
  
+        #draw player bins
         window.blit(self.player_image_1,(logic.p1.pos[0], logic.p1.pos[1]))
         window.blit(self.player_image_2,(logic.p2.pos[0], logic.p2.pos[1]))
-        for trash in logic.trash_list:
-            window.blit(self.trash_image,(trash.pos[0], trash.pos[1]))
+        
         pygame.display.update()
