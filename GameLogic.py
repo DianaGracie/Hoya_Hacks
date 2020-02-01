@@ -3,7 +3,7 @@ from Trash import Trash
 
 class GameLogic:
 	def __init__(self):
-		x = 1
+		self.x = 1
 
 	def update(self, dt):
-		x += dt
+		self.x += dt
