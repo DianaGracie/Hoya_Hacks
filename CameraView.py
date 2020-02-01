@@ -8,18 +8,25 @@ class CameraView:
         self.background_image = pygame.image.load('images/background.png')
 
     def processInput(self, window, logic, dt):
+        pressed = pygame.key.get_pressed()
+
+        if (pressed[pygame.K_LEFT]):
+            logic.p1.thrustLeft(dt)
+        if (pressed[pygame.K_RIGHT]):
+            logic.p1.thrustRight(dt)
+
+        if (pressed[pygame.K_a]):
+            logic.p2.thrustLeft(dt)
+        if (pressed[pygame.K_d]):
+            logic.p2.thrustRight(dt)
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 logic.state = "exit"
                 
             # if keystroke is pressed check whether its right or left
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
-                    logic.p1.thrustLeft(dt)
-                if event.key == pygame.K_RIGHT:
-                    logic.p1.thrustRight(dt)
-                if event.key == pygame.K_SPACE:
-                    pass
+                pass
 
     def draw(self, window, logic):
         # RGB = Red, Green, Blue

@@ -11,7 +11,7 @@ class Player:
 		pass
 
 	def thrustLeft(self, dt):
-		self.pos[0] += dt
+		self.pos[0] -= dt
 
 	def thrustRight(self, dt):
-		self.pos[0] -= dt
+		self.pos[0] += dt
