@@ -27,8 +27,6 @@ while logic.state != "exit":
 
     #get elapsed time
     dt = clock.tick(60)
-    #print(dt)
-
     #process user input
     view.processInput(screen, logic, dt)
     #tick natural game logic
