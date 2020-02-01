@@ -16,6 +16,9 @@ class GameLogic:
 	def update(self, dt):
 		self.p1.update(dt)
 		self.p2.update(dt)
+		#have trash fall
+		for trash in self.trash_list:
+			trash.update(dt)
 
 		#switch background
 		self.switch_counter += dt * 0.1
@@ -29,7 +32,6 @@ class GameLogic:
 			self.trash_timer = 0
 			self.trash_list.append(Trash())
 
-		for trash in self.trash_list:
-			trash.update(dt)
+
 
 
