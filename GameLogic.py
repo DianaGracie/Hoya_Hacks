@@ -7,7 +7,15 @@ class GameLogic:
 		self.p1 = Player(1)
 		self.p2 = Player(2)
 		self.trash_list = []
+		self.bg_state = True
+		self.switch_counter = 0
 
 	def update(self, dt):
 		self.p1.update(dt)
 		self.p2.update(dt)
+
+		#switch background
+		self.switch_counter += dt * 0.1
+		if (self.switch_counter >= 40):
+			self.bg_state = not self.bg_state
+			self.switch_counter = 0

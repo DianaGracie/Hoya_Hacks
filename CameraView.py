@@ -5,7 +5,8 @@ class CameraView:
         self.player_image_1 = pygame.image.load('images/trash.png')
         self.player_image_2 = pygame.image.load('images/recycle_bin.png')
         self.trash_image = pygame.image.load('images/enemy.png')
-        self.background_image = pygame.image.load('images/background.png')
+        self.bg1 = pygame.image.load('images/background.png')
+        self.bg2 = pygame.image.load('images/background2.png')
 
     def processInput(self, window, logic, dt):
         pressed = pygame.key.get_pressed()
@@ -32,7 +33,12 @@ class CameraView:
         # RGB = Red, Green, Blue
         window.fill((0, 0, 0))
         # Background Image
-        window.blit(self.background_image, (0, 0))
+        if (logic.bg_state):
+            window.blit(self.bg1, (0, 0))
+        else:
+            window.blit(self.bg2, (0, 0))
+
+        
  
         window.blit(self.player_image_1,(logic.p1.pos[0], logic.p1.pos[1]))
         window.blit(self.player_image_2,(logic.p2.pos[0], logic.p2.pos[1]))
