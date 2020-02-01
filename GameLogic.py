@@ -1,5 +1,6 @@
 from Player import Player
 from Trash import Trash
+from random import * 
 
 class GameLogic:
 	def __init__(self):
@@ -10,6 +11,8 @@ class GameLogic:
 		self.bg_state = True
 		self.switch_counter = 0
 
+		self.trash_timer = 0
+
 	def update(self, dt):
 		self.p1.update(dt)
 		self.p2.update(dt)
@@ -19,3 +22,14 @@ class GameLogic:
 		if (self.switch_counter >= 40):
 			self.bg_state = not self.bg_state
 			self.switch_counter = 0
+
+		#generate trash
+		self.trash_timer += dt * 0.1
+		if (self.trash_timer >= 200*random()+100):
+			self.trash_timer = 0
+			self.trash_list.append(Trash())
+
+		for trash in self.trash_list:
+			trash.update(dt)
+
+
