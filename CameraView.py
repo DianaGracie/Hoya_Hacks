@@ -68,7 +68,7 @@ class CameraView:
 
             #draw trash
             for trash in logic.trash_list:
-                if (trash.id > 5):
+                if (trash.id > 7):
                     trash_pic = self.recycle[trash.id - 8]
                     trash.isTrash = False
                 else:
