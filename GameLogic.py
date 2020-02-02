@@ -43,24 +43,27 @@ class GameLogic:
 					if trash.isTrash == True:
 						self.correctcapture = 1
 						self.trash_list.remove(trash)
+						continue
 					else:
 						self.wrong = 1
 						self.trash_list.remove(trash)
+						continue
 				
 				if (self.p2.pos[0] < trash.pos[0]*800 and self.p2.pos[0] + 50 > trash.pos[0]*800):
 					if trash.isTrash == False:
 						self.correctcapture = 1
 						self.trash_list.remove(trash)
+						continue
 					else:
 						self.wrong = 1
 						self.trash_list.remove(trash)
+						continue
 
 				elif (trash.pos[1] > 540):
 					#handle trash water collision
 					self.trash_list.remove(trash)
 					self.miss = 1
 					self.pollution += 5
-					print(str(self.pollution))
 					#check endgame
 					if (self.pollution >= 100):
 						self.state = "endgame"
