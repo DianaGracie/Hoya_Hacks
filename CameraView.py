@@ -99,7 +99,7 @@ class CameraView:
 
             largeText = pygame.font.Font('freesansbold.ttf', 30)
             TextSurf, TextRect = self.text_objects("Pollution = " + str(logic.pollution) + "%", largeText)
-            TextRect.center = ((800/4),(600/8))
+            TextRect.center = ((800/5),(600/8.5))
             window.blit(TextSurf, TextRect)
 
             #pygame.draw.rect(window, (0,0,0), (logic.p1.pos[0], trash.pos[1], ))
