@@ -25,8 +25,8 @@ class CameraView:
             pygame.image.load('images/recyclables/7.png')]
 
 
-    def text_objects(self, text, font):
-        textSurface = font.render(text, True, (255,0,0))
+    def text_objects(self, text, font, color):
+        textSurface = font.render(text, True, color)
         return textSurface, textSurface.get_rect()
 
 
@@ -34,17 +34,21 @@ class CameraView:
         pressed = pygame.key.get_pressed()
 
         if (logic.state == "endgame"):
-            pass
+            if (pressed[pygame.K_RETURN]):
+                logic.pollution = 0
+                logic.trash_list.clear()
+                logic.state = "playing"
 
-        if (pressed[pygame.K_LEFT]):
-            logic.p1.thrustLeft(dt)
-        if (pressed[pygame.K_RIGHT]):
-            logic.p1.thrustRight(dt)
+        if (logic.state == "playing"):
+            if (pressed[pygame.K_LEFT]):
+                logic.p1.thrustLeft(dt)
+            if (pressed[pygame.K_RIGHT]):
+                logic.p1.thrustRight(dt)
 
-        if (pressed[pygame.K_a]):
-            logic.p2.thrustLeft(dt)
-        if (pressed[pygame.K_d]):
-            logic.p2.thrustRight(dt)
+            if (pressed[pygame.K_a]):
+                logic.p2.thrustLeft(dt)
+            if (pressed[pygame.K_d]):
+                logic.p2.thrustRight(dt)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -52,12 +56,24 @@ class CameraView:
                 
             # if keystroke is pressed check whether its right or left
             if event.type == pygame.KEYDOWN:
-                pass
+                if event.key == pygame.K_SPACE:
+                    if (logic.state == "paused"):
+                        logic.state = "playing"
+                    elif (logic.state == "playing"):
+                        logic.state = "paused"
 
     def draw(self, window, logic):
         if (logic.state == "endgame"):
             window.fill((255, 0, 0))
-        if (logic.state == "playing"):
+            largeText = pygame.font.Font('freesansbold.ttf', 50)
+            TextSurf, TextRect = self.text_objects("Pollution = " + str(logic.pollution) + "%", largeText, (0,0,0))
+            TextRect.center = ((800/2),(600/2))
+            window.blit(TextSurf, TextRect)
+            TextSurf, TextRect = self.text_objects("Press Enter to Try Again", largeText, (0,0,0))
+            TextRect.center = ((800/2),(600/4))
+            window.blit(TextSurf, TextRect)
+
+        if (logic.state == "playing" or logic.state == "paused"):
             # RGB = Red, Green, Blue
             window.fill((0, 0, 0))
             # Background Image
@@ -86,9 +102,7 @@ class CameraView:
                 logic.correctcapture = 0
 
             if logic.miss:
-                sfx = 'music/Splash' + str(randint(1,3)) + '.wav'
-                effect = pygame.mixer.Sound(sfx)
-                print(sfx)
+                effect = pygame.mixer.Sound('music/Splash' + str(randint(1,3)) + '.wav')
                 effect.play()
                 logic.miss = 0
 
@@ -98,10 +112,14 @@ class CameraView:
                 logic.wrong = 0
 
             largeText = pygame.font.Font('freesansbold.ttf', 30)
-            TextSurf, TextRect = self.text_objects("Pollution = " + str(logic.pollution) + "%", largeText)
+            TextSurf, TextRect = self.text_objects("Pollution = " + str(logic.pollution) + "%", largeText, (255,0,0))
             TextRect.center = ((800/5),(600/8.5))
             window.blit(TextSurf, TextRect)
 
-            #pygame.draw.rect(window, (0,0,0), (logic.p1.pos[0], trash.pos[1], ))
+            if (logic.state == "paused"):
+                s = pygame.Surface((800, 600))
+                s.set_alpha(120)
+                s.fill((255,255, 0))
+                window.blit(s, (0,0))
         
         pygame.display.update()
