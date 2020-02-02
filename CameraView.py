@@ -76,7 +76,7 @@ class CameraView:
                 logic.correctcapture = 0
 
             if logic.miss:
-                sfx = f'music/Splash{randint(1,3)}.wav'
+                sfx = 'music/Splash' + str(randint(1,3)) + '.wav'
                 effect = pygame.mixer.Sound(sfx)
                 print(sfx)
                 effect.play()
