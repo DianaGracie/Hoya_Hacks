@@ -12,13 +12,17 @@ class CameraView:
             pygame.image.load('images/garbage/2.png'), 
             pygame.image.load('images/garbage/3.png'),
             pygame.image.load('images/garbage/4.png'),
-            pygame.image.load('images/garbage/5.png')]
+            pygame.image.load('images/garbage/5.png'),
+            pygame.image.load('images/garbage/6.png'),
+            pygame.image.load('images/garbage/7.png')]
 
         self.recycle = [pygame.image.load('images/recyclables/1.png'),
             pygame.image.load('images/recyclables/2.png'),
             pygame.image.load('images/recyclables/3.png'),
             pygame.image.load('images/recyclables/4.png'),
-            pygame.image.load('images/recyclables/5.png')]
+            pygame.image.load('images/recyclables/5.png'),
+            pygame.image.load('images/recyclables/6.png'),
+            pygame.image.load('images/recyclables/7.png')]
 
     def processInput(self, window, logic, dt):
         pressed = pygame.key.get_pressed()
@@ -59,7 +63,7 @@ class CameraView:
             #draw trash
             for trash in logic.trash_list:
                 if (trash.id > 5):
-                    trash_pic = self.recycle[trash.id - 6]
+                    trash_pic = self.recycle[trash.id - 8]
                     trash.isTrash = False
                 else:
                     trash_pic = self.garbage[trash.id - 1]

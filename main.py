@@ -12,7 +12,7 @@ pygame.init()
 screen = pygame.display.set_mode((800, 600))
 
 # Sound
-mixer.music.load("music/background!.wav")
+mixer.music.load("music/background.wav")
 mixer.music.play(-1)
 # Caption and Icon
 pygame.display.set_caption("Recycle Game")
