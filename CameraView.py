@@ -1,4 +1,5 @@
 import pygame
+from random import *
 
 class CameraView:
     def __init__(self):
@@ -23,7 +24,7 @@ class CameraView:
         pressed = pygame.key.get_pressed()
 
         if (logic.state == "endgame"):
-        	pass
+            pass
 
         if (pressed[pygame.K_LEFT]):
             logic.p1.thrustLeft(dt)
@@ -67,6 +68,24 @@ class CameraView:
             #draw player bins
             window.blit(self.player_image_1,(logic.p1.pos[0], logic.p1.pos[1]))
             window.blit(self.player_image_2,(logic.p2.pos[0], logic.p2.pos[1]))
+
+            #play the sound
+            if logic.correctcapture:
+                effect = pygame.mixer.Sound('music/SmallSuccess.wav')
+                effect.play()
+                logic.correctcapture = 0
+
+            if logic.miss:
+                sfx = f'music/Splash{randint(1,3)}.wav'
+                effect = pygame.mixer.Sound(sfx)
+                print(sfx)
+                effect.play()
+                logic.miss = 0
+
+            if logic.wrong:
+                effect = pygame.mixer.Sound('music/laser.wav')
+                effect.play()
+                logic.wrong = 0
 
             #pygame.draw.rect(window, (0,0,0), (logic.p1.pos[0], trash.pos[1], ))
         
