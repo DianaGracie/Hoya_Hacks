@@ -56,6 +56,7 @@ class GameLogic:
 						continue
 					else:
 						self.wrong = 1
+						self.pollution += 1
 						self.trash_list.remove(trash)
 						continue
 
@@ -66,5 +67,6 @@ class GameLogic:
 					self.pollution += 5
 					#check endgame
 					if (self.pollution >= 100):
+						self.pollution = 100
 						self.state = "endgame"
 
