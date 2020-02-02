@@ -20,6 +20,12 @@ class CameraView:
             pygame.image.load('images/recyclables/4.png'),
             pygame.image.load('images/recyclables/5.png')]
 
+
+    def text_objects(self, text, font):
+        textSurface = font.render(text, True, (255,0,0))
+        return textSurface, textSurface.get_rect()
+
+
     def processInput(self, window, logic, dt):
         pressed = pygame.key.get_pressed()
 
@@ -86,6 +92,11 @@ class CameraView:
                 effect = pygame.mixer.Sound('music/laser.wav')
                 effect.play()
                 logic.wrong = 0
+
+            largeText = pygame.font.Font('freesansbold.ttf', 30)
+            TextSurf, TextRect = self.text_objects("Pollution = " + str(logic.pollution) + "%", largeText)
+            TextRect.center = ((800/4),(600/8))
+            window.blit(TextSurf, TextRect)
 
             #pygame.draw.rect(window, (0,0,0), (logic.p1.pos[0], trash.pos[1], ))
         
