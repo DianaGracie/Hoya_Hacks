@@ -6,7 +6,7 @@ class Trash:
 		while (x_pos > .93):
 			x_pos = random()
 		self.pos = [x_pos, -100]
-		self.id = randint(1,10)
+		self.id = randint(1,14)
 		self.isTrash = True
 
 	def update(self, dt):
