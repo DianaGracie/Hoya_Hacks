@@ -8,19 +8,22 @@ class CameraView:
         self.bg2 = pygame.image.load('images/background2.png')
 
         self.garbage = [pygame.image.load('images/garbage/1.png'),
-        pygame.image.load('images/garbage/2.png'), 
-        pygame.image.load('images/garbage/3.png'),
-        pygame.image.load('images/garbage/4.png'),
-        pygame.image.load('images/garbage/5.jpg')]
+            pygame.image.load('images/garbage/2.png'), 
+            pygame.image.load('images/garbage/3.png'),
+            pygame.image.load('images/garbage/4.png'),
+            pygame.image.load('images/garbage/5.png')]
 
         self.recycle = [pygame.image.load('images/recyclables/1.png'),
-        pygame.image.load('images/recyclables/2.png'),
-        pygame.image.load('images/recyclables/3.png'),
-        pygame.image.load('images/recyclables/4.png'),
-        pygame.image.load('images/recyclables/5.png')]
+            pygame.image.load('images/recyclables/2.png'),
+            pygame.image.load('images/recyclables/3.png'),
+            pygame.image.load('images/recyclables/4.png'),
+            pygame.image.load('images/recyclables/5.png')]
 
     def processInput(self, window, logic, dt):
         pressed = pygame.key.get_pressed()
+
+        if (logic.state == "endgame"):
+        	pass
 
         if (pressed[pygame.K_LEFT]):
             logic.p1.thrustLeft(dt)
@@ -41,24 +44,30 @@ class CameraView:
                 pass
 
     def draw(self, window, logic):
-        # RGB = Red, Green, Blue
-        window.fill((0, 0, 0))
-        # Background Image
-        if (logic.bg_state):
-            window.blit(self.bg1, (0, 0))
-        else:
-            window.blit(self.bg2, (0, 0))
-
-        #draw trash
-        for trash in logic.trash_list:
-            if (trash.id > 5):
-                trash_pic = self.recycle[trash.id - 6]
+        if (logic.state == "endgame"):
+            window.fill((255, 0, 0))
+        if (logic.state == "playing"):
+            # RGB = Red, Green, Blue
+            window.fill((0, 0, 0))
+            # Background Image
+            if (logic.bg_state):
+                window.blit(self.bg1, (0, 0))
             else:
-                trash_pic = self.garbage[trash.id - 1]
-            window.blit(trash_pic, (trash.pos[0]*800, trash.pos[1]))
- 
-        #draw player bins
-        window.blit(self.player_image_1,(logic.p1.pos[0], logic.p1.pos[1]))
-        window.blit(self.player_image_2,(logic.p2.pos[0], logic.p2.pos[1]))
+                window.blit(self.bg2, (0, 0))
+
+            #draw trash
+            for trash in logic.trash_list:
+                if (trash.id > 5):
+                    trash_pic = self.recycle[trash.id - 6]
+                    trash.isTrash = False
+                else:
+                    trash_pic = self.garbage[trash.id - 1]
+                window.blit(trash_pic, (trash.pos[0]*800, trash.pos[1]))
+     
+            #draw player bins
+            window.blit(self.player_image_1,(logic.p1.pos[0], logic.p1.pos[1]))
+            window.blit(self.player_image_2,(logic.p2.pos[0], logic.p2.pos[1]))
+
+            #pygame.draw.rect(window, (0,0,0), (logic.p1.pos[0], trash.pos[1], ))
         
         pygame.display.update()

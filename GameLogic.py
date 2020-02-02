@@ -10,12 +10,15 @@ class GameLogic:
 		self.trash_list = []
 		self.bg_state = True
 		self.switch_counter = 0
-
 		self.trash_timer = 0
+		self.pollution = 0
 
 	def update(self, dt):
 		self.p1.update(dt)
 		self.p2.update(dt)
+		#have trash fall
+		for trash in self.trash_list:
+			trash.update(dt)
 
 		#switch background
 		self.switch_counter += dt * 0.1
@@ -29,7 +32,23 @@ class GameLogic:
 			self.trash_timer = 0
 			self.trash_list.append(Trash())
 
+		#detect collisions
 		for trash in self.trash_list:
-			trash.update(dt)
+			if (trash.pos[1] > 420):
 
+				if (self.p1.pos[0] < trash.pos[0]*800 and self.p1.pos[0] + 50 > trash.pos[0]*800):
+					if trash.isTrash == True:
+						self.trash_list.remove(trash)
+				
+				if (self.p2.pos[0] < trash.pos[0]*800 and self.p2.pos[0] + 50 > trash.pos[0]*800):
+					if trash.isTrash == False:
+						self.trash_list.remove(trash)
+
+				elif (trash.pos[1] > 540):
+					#handle trash water collision
+					self.trash_list.remove(trash)
+					self.pollution += 5
+					#check endgame
+					if (self.pollution >= 100):
+						self.state = "endgame"
 
