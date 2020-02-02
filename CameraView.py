@@ -22,6 +22,9 @@ class CameraView:
     def processInput(self, window, logic, dt):
         pressed = pygame.key.get_pressed()
 
+        if (logic.state == "endgame"):
+        	pass
+
         if (pressed[pygame.K_LEFT]):
             logic.p1.thrustLeft(dt)
         if (pressed[pygame.K_RIGHT]):
@@ -56,6 +59,7 @@ class CameraView:
             for trash in logic.trash_list:
                 if (trash.id > 5):
                     trash_pic = self.recycle[trash.id - 6]
+                    trash.isTrash = False
                 else:
                     trash_pic = self.garbage[trash.id - 1]
                 window.blit(trash_pic, (trash.pos[0]*800, trash.pos[1]))

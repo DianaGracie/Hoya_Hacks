@@ -37,10 +37,12 @@ class GameLogic:
 			if (trash.pos[1] > 420):
 
 				if (self.p1.pos[0] < trash.pos[0]*800 and self.p1.pos[0] + 50 > trash.pos[0]*800):
-					self.trash_list.remove(trash)
+					if trash.isTrash == True:
+						self.trash_list.remove(trash)
 				
 				if (self.p2.pos[0] < trash.pos[0]*800 and self.p2.pos[0] + 50 > trash.pos[0]*800):
-					self.trash_list.remove(trash)
+					if trash.isTrash == False:
+						self.trash_list.remove(trash)
 
 				elif (trash.pos[1] > 540):
 					#handle trash water collision

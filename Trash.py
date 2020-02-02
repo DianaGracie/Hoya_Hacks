@@ -7,6 +7,7 @@ class Trash:
 			x_pos = random()
 		self.pos = [x_pos, -100]
 		self.id = randint(1,10)
+		self.isTrash = True
 
 	def update(self, dt):
 		self.pos[1] += dt * 0.1
