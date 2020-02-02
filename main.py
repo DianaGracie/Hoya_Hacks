@@ -10,6 +10,7 @@ from CameraView import CameraView
 pygame.init()
 # create the screen
 screen = pygame.display.set_mode((800, 600))
+
 # Sound
 mixer.music.load("music/background!.wav")
 mixer.music.play(-1)
@@ -21,6 +22,12 @@ logic = GameLogic()
 view = CameraView()
 clock = pygame.time.Clock()
 
+#create pollution score
+pygame.display.set_caption('Pollution = ' + str(logic.pollution))
+red = (255,0,0)
+def text_objects(text, font):
+    textSurface = font.render(text, True, red)
+    return textSurface, textSurface.get_rect()
 # Game Loop
 while logic.state != "exit":
 

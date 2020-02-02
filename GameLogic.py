@@ -60,6 +60,7 @@ class GameLogic:
 					self.trash_list.remove(trash)
 					self.miss = 1
 					self.pollution += 5
+					print(str(self.pollution))
 					#check endgame
 					if (self.pollution >= 100):
 						self.state = "endgame"
